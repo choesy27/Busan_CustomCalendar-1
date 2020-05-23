@@ -167,19 +167,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         +myLocation.getLongitude()
                         +"&radius=650&sensor=false&language=ko"
                         +"&key=AIzaSyCVXAin1pBGTpLaWSApK7o3DFVOqRpWBiU"
-                        +"&types=cafe";
-//                if(type_keyword!=null && !type_keyword.equals("all")==false){
-//                    site+="&types="+type_keyword;
-//                }
+                        +"&types="+type_keyword;
+                if(type_keyword!=null && type_keyword.equals("all")){
+                    site+="&types="+type_keyword;
+                }
+
+
                 // 접속할 페이지 주소
-//                String site="https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-//                        +"&key=AIzaSyCVXAin1pBGTpLaWSApK7o3DFVOqRpWBiU"
-//                        + "&location="+myLocation.getLatitude()+","
-//                        +myLocation.getLongitude()
-//                        +"&radius=500&sensor=false&language=ko";
-//                if(type_keyword!=null && !type_keyword.equals("all")){
-//                    site+="&types="+type_keyword;
-//                }
+               /* String site="https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+                        +"&key=AIzaSyCVXAin1pBGTpLaWSApK7o3DFVOqRpWBiU"
+                        + "&location="+myLocation.getLatitude()+","
+                        +myLocation.getLongitude()
+                        +"&radius=500&sensor=false&language=ko";
+                if(type_keyword!=null && !type_keyword.equals("all")){
+                   site+="&types="+type_keyword;
+                }*/
+
+
                 // 접속
                 URL url=new URL(site);
                 URLConnection conn=url.openConnection();
