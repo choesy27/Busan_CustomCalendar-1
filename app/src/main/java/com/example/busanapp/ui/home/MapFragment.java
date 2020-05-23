@@ -8,14 +8,18 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -47,17 +51,23 @@ import static android.content.Context.LOCATION_SERVICE;
 
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+
+
     // 구글 서버로 부터 받아온 데이터를 저장할 리스트
     ArrayList<Double> lat_list;
     ArrayList<Double> lng_list;
     ArrayList<String> name_list;
     ArrayList<String> vicinity_list;
+
+
     // 지도의 표시한 마커(주변장소표시)를 관리하는 객체를 담을 리스트
     ArrayList<Marker> markers_list;
+
     // 다이얼로그를 구성하기 위한 배열
     String[] category_name_array={
             "모두","ATM","은행","미용실","카페","교회","주유소","식당"
     };
+
     // types 값 배열
     String[] category_value_array={
             "all","atm","bank","beauty_salon","cafe","church","gas_station","restaurant"
@@ -68,20 +78,42 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
     };
+
     // 현재 사용자 위치
     Location myLocation;
+
     TextView text;
     // 위치 정보를 관리하는 매니저
+
     LocationManager manager;
     //지도를 관리하는 객체
+
     GoogleMap map;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setHasOptionsMenu(true);
+        //아래 코드 View 함수로 옮김
+
         //나중에는 삭제할 부분이지만 현재 위치를 확인하기위해 잠깐 메인뷰에 삽입하여사용
-        FragmentManager fm = getActivity().getSupportFragmentManager();
+        /*FragmentManager fm = getSupportFragmentManager();
+        SupportMapFragment map_frag =(SupportMapFragment)fm.findFragmentById(R.id.map);
+        map_frag.getMapAsync(this);
+
+        lat_list=new ArrayList<>();
+        lng_list=new ArrayList<>();
+        name_list=new ArrayList<>();
+        vicinity_list=new ArrayList<>();
+        markers_list=new ArrayList<>();
+
+        checkPermission();*/
+    }
+
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        FragmentManager fm = getChildFragmentManager();
         SupportMapFragment map_frag =(SupportMapFragment)fm.findFragmentById(R.id.map);
         map_frag.getMapAsync(this);
 
@@ -92,9 +124,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         markers_list=new ArrayList<>();
 
         checkPermission();
-    }
 
-    private void setContentView(int activity_main) {
+        return view;
     }
 
 
@@ -201,7 +232,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             }catch (Exception e){e.printStackTrace();}
         }
-
     }
     public void showMarker(){
         getActivity().runOnUiThread(new Runnable() {
@@ -339,10 +369,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     }
     // 메뉴를 구성하는 메서드
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getActivity().getMenuInflater();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu,inflater);
+        MenuInflater inflate = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-        return true;
     }
     // 메뉴 항목을 터치하면 호출되는 메서드
     @Override
