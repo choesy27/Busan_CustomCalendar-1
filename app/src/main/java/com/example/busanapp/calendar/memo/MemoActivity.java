@@ -36,6 +36,8 @@ public class MemoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_icon);
+        getSupportActionBar().setTitle("메모 작성");
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -57,15 +59,14 @@ public class MemoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
 
-        if (id == R.id.item_save) {
-            onBackPressed();
-        } else if (id == android.R.id.home) {
-            finish();
-            return true;
+            case R.id.item_save:
+                onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
