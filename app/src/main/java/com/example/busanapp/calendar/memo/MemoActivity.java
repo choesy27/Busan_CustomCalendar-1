@@ -15,6 +15,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.busanapp.R;
 
+import java.util.Objects;
+
 public class MemoActivity extends AppCompatActivity {
     private EditText mTitle;
     private EditText mContent;
@@ -34,7 +36,6 @@ public class MemoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_icon);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -57,13 +58,17 @@ public class MemoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.item_save) {
             onBackPressed();
+        } else if (id == android.R.id.home) {
+            finish();
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
-    /* Memo Save Button */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.save_menu, menu);
