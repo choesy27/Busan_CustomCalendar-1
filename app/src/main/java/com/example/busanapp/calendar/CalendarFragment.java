@@ -48,8 +48,6 @@ public class CalendarFragment extends Fragment {
 
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     MaterialCalendarView materialCalendarView;
-    //  String time, kcal, menu;
-    //  Cursor cursor;
 
     public static final int REQUEST_CODE_INSERT = 1000;
 
@@ -78,7 +76,6 @@ public class CalendarFragment extends Fragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-
         recyclerView.setAdapter(textAdapter);
 
         getMemoCursor();
@@ -107,8 +104,8 @@ public class CalendarFragment extends Fragment {
             mTextDate.setText(shot_Day);
         });
 
-        // 메모 클릭 이벤트(수정)
-        textAdapter.setOnItemClickListener((TextAdapter.OnItemClickListener) (v, pos) -> {
+        // 메모 클릭 이벤트
+        textAdapter.setOnItemClickListener((v, pos) -> {
             Intent intent = new Intent(getActivity(), MemoActivity.class);
             intent.putExtra("SelectedDate", mTime);
 
@@ -127,9 +124,8 @@ public class CalendarFragment extends Fragment {
 
             startActivityForResult(intent, REQUEST_CODE_INSERT);
         });
-
-        /* Memo Delete */
-        textAdapter.setOnItemLongClickListener((TextAdapter.OnItemLongClickListener) (v, pos) -> {
+        
+        textAdapter.setOnItemLongClickListener((v, pos) -> {
             String[] params = {mTime};
 
             Cursor cursor = (Cursor) dbHelper.getReadableDatabase().query(MemoContract.MemoEntry.TABLE_NAME, null, "date=?", params, null, null, null);
