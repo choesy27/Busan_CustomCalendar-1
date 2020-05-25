@@ -32,6 +32,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".calendar.CalendarFragment" />
+        <activity android:name=".calendar.memo.MemoActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

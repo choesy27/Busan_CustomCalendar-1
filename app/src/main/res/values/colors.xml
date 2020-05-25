@@ -8,8 +8,6 @@
     <color name="btn_background">#00ff0000</color>
 
     <!-- 캘린더 -->
-    <color name="CurrentBackground">#44eebd82</color>
-    <color name="Blue">#001EFF</color>
+    <color name="colorSelectedDate">#C8C8FF</color>
     <color name="color_GridLine">#66BDBDBD</color>
-    <color name="selective_date">#C8C8FF</color>
 </resources>

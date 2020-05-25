@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.busanapp.calendar.CustomCalendarView
-        android:id="@+id/custom_calendar_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.example.busanapp.calendar.CustomCalendarView>
+    <include layout="@layout/calendar_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
